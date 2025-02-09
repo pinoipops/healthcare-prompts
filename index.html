@@ -81,6 +81,10 @@
       font-style: italic;
       color: #666;
     }
+    .error {
+      color: #d9534f;
+      font-weight: bold;
+    }
     @media (max-width: 600px) {
       header h1 {
         font-size: 1.5rem;
@@ -143,12 +147,18 @@
           throw new Error(`Error fetching file: ${response.status}`);
         }
         const text = await response.text();
+
+        // Validate the content (e.g., ensure it's not empty or incomplete)
+        if (!text || text.trim().length === 0) {
+          throw new Error('The file is empty or incomplete.');
+        }
+
         markdownCache[file] = text; // Cache the fetched content
         markdownContent.innerHTML = marked.parse(text); // Render Markdown content
         scrollToContent();
       } catch (error) {
         console.error('Error loading Markdown file:', error);
-        markdownContent.innerHTML = '<p>Unable to load content. Please try again later.</p>';
+        markdownContent.innerHTML = `<p class="error">Unable to load content. ${error.message}</p>`;
       }
     }
 
