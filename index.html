@@ -7,7 +7,7 @@
   <!-- Import Lexend Font -->
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&display=swap" rel="stylesheet">
   <!-- Include marked.js for Markdown rendering -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
   <style>
     /* General Styles */
     body {
@@ -76,6 +76,11 @@
       border-radius: 5px;
       margin-top: 20px;
     }
+    .loading {
+      text-align: center;
+      font-style: italic;
+      color: #666;
+    }
     @media (max-width: 600px) {
       header h1 {
         font-size: 1.5rem;
@@ -91,46 +96,67 @@
     <h1>Healthcare Prompts</h1>
   </header>
   <main>
-    <h2>Browse Prompts by Category</h2>
-    <ul>
-      <li><a href="#" data-md="sections/1-patient-communication.md">Patient Communication</a></li>
-      <li><a href="#" data-md="sections/2-medical-documentation.md">Medical Documentation</a></li>
-      <li><a href="#" data-md="sections/3-medical-research.md">Medical Research</a></li>
-      <li><a href="#" data-md="sections/4-healthcare-policy-and-ethics.md">Healthcare Policy and Ethics</a></li>
-      <li><a href="#" data-md="sections/5-medical-education-and-training.md">Medical Education and Training</a></li>
-      <li><a href="#" data-md="sections/6-interdisciplinary-collaboration.md">Interdisciplinary Collaboration</a></li>
-      <li><a href="#" data-md="sections/7-public-health-and-prevention.md">Public Health and Prevention</a></li>
-      <li><a href="#" data-md="sections/8-medical-practice-management.md">Medical Practice Management</a></li>
-      <li><a href="#" data-md="sections/9-mental-health-and-wellbeing.md">Mental Health and Wellbeing</a></li>
-      <li><a href="#" data-md="sections/10-healthcare-marketing-and-outreach.md">Healthcare Marketing and Outreach</a></li>
-      <li><a href="#" data-md="sections/11-patient-privacy-and-data-security.md">Patient Privacy and Data Security</a></li>
-      <li><a href="#" data-md="sections/12-telemedicine-and-remote-patient-care.md">Telemedicine and Remote Patient Care</a></li>
-    </ul>
-    <p><a href="README.md">View the README for more details.</a></p>
-    <div id="markdown-content" class="markdown-content"></div>
+    <section aria-labelledby="categories-heading">
+      <h2 id="categories-heading">Browse Prompts by Category</h2>
+      <ul role="navigation">
+        <li><a href="#" data-md="sections/1-patient-communication.md" aria-label="Patient Communication">Patient Communication</a></li>
+        <li><a href="#" data-md="sections/2-medical-documentation.md" aria-label="Medical Documentation">Medical Documentation</a></li>
+        <li><a href="#" data-md="sections/3-medical-research.md" aria-label="Medical Research">Medical Research</a></li>
+        <li><a href="#" data-md="sections/4-healthcare-policy-and-ethics.md" aria-label="Healthcare Policy and Ethics">Healthcare Policy and Ethics</a></li>
+        <li><a href="#" data-md="sections/5-medical-education-and-training.md" aria-label="Medical Education and Training">Medical Education and Training</a></li>
+        <li><a href="#" data-md="sections/6-interdisciplinary-collaboration.md" aria-label="Interdisciplinary Collaboration">Interdisciplinary Collaboration</a></li>
+        <li><a href="#" data-md="sections/7-public-health-and-prevention.md" aria-label="Public Health and Prevention">Public Health and Prevention</a></li>
+        <li><a href="#" data-md="sections/8-medical-practice-management.md" aria-label="Medical Practice Management">Medical Practice Management</a></li>
+        <li><a href="#" data-md="sections/9-mental-health-and-wellbeing.md" aria-label="Mental Health and Wellbeing">Mental Health and Wellbeing</a></li>
+        <li><a href="#" data-md="sections/10-healthcare-marketing-and-outreach.md" aria-label="Healthcare Marketing and Outreach">Healthcare Marketing and Outreach</a></li>
+        <li><a href="#" data-md="sections/11-patient-privacy-and-data-security.md" aria-label="Patient Privacy and Data Security">Patient Privacy and Data Security</a></li>
+        <li><a href="#" data-md="sections/12-telemedicine-and-remote-patient-care.md" aria-label="Telemedicine and Remote Patient Care">Telemedicine and Remote Patient Care</a></li>
+      </ul>
+      <p><a href="README.md" aria-label="View the README for more details">View the README for more details.</a></p>
+    </section>
+    <article id="markdown-content" class="markdown-content" tabindex="-1">
+      <!-- Markdown content will be rendered here -->
+    </article>
   </main>
   <footer>
     &copy; 2023 Healthcare Prompts. All rights reserved.
   </footer>
   <script>
+    // Cache for storing fetched Markdown files
+    const markdownCache = {};
+
     // Function to fetch and render Markdown content
-    function renderMarkdown(file) {
+    async function renderMarkdown(file) {
       const markdownContent = document.getElementById('markdown-content');
-      markdownContent.innerHTML = '<p>Loading...</p>'; // Show loading message
-      fetch(file)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`Error fetching file: ${response.status}`);
-          }
-          return response.text();
-        })
-        .then(text => {
-          markdownContent.innerHTML = marked.parse(text); // Render Markdown content
-        })
-        .catch(error => {
-          console.error('Error loading Markdown file:', error);
-          markdownContent.innerHTML = '<p>Unable to load content. Please try again later.</p>';
-        });
+      markdownContent.innerHTML = '<p class="loading">Loading...</p>'; // Show loading message
+
+      // Check if the file is already cached
+      if (markdownCache[file]) {
+        markdownContent.innerHTML = marked.parse(markdownCache[file]);
+        scrollToContent();
+        return;
+      }
+
+      try {
+        const response = await fetch(file);
+        if (!response.ok) {
+          throw new Error(`Error fetching file: ${response.status}`);
+        }
+        const text = await response.text();
+        markdownCache[file] = text; // Cache the fetched content
+        markdownContent.innerHTML = marked.parse(text); // Render Markdown content
+        scrollToContent();
+      } catch (error) {
+        console.error('Error loading Markdown file:', error);
+        markdownContent.innerHTML = '<p>Unable to load content. Please try again later.</p>';
+      }
+    }
+
+    // Function to scroll to the markdown content and set focus
+    function scrollToContent() {
+      const markdownContent = document.getElementById('markdown-content');
+      markdownContent.scrollIntoView({ behavior: 'smooth' });
+      markdownContent.focus(); // Set focus for keyboard and screen reader users
     }
 
     // Add click event listeners to all category links
