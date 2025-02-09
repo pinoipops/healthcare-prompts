@@ -1,97 +1,179 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Healthcare Prompts</title>
+  <!-- Import Lexend Font from Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Include marked.js for Markdown rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
-    :root {
-      --primary-color: #1a73e8;
-      --background-color: #f8f9fa;
-    }
-
+    /* General Styles */
     body {
       font-family: 'Lexend', sans-serif;
-      line-height: 1.6;
       margin: 0;
-      padding: 2rem;
-      background-color: var(--background-color);
+      padding: 0;
+      line-height: 1.6;
+      background-color: #f9f9f9;
       color: #333;
     }
 
-    .container {
+    header {
+      background-color: #0073e6;
+      color: white;
+      padding: 20px 10px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    header p {
+      margin: 5px 0 0;
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
+
+    main {
       max-width: 800px;
-      margin: 0 auto;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
-    h1 {
-      color: var(--primary-color);
-      border-bottom: 3px solid var(--primary-color);
-      padding-bottom: 0.5rem;
+    h2 {
+      color: #0073e6;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 15px;
     }
 
-    .section-list {
-      list-style: none;
+    ul {
+      list-style-type: none;
       padding: 0;
     }
 
-    .section-item {
-      background: white;
-      margin: 1rem 0;
-      padding: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
+    li {
+      background-color: #f0f8ff;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 5px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .section-item:hover {
-      transform: translateY(-2px);
+    li:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    .section-link {
-      color: var(--primary-color);
+    a {
       text-decoration: none;
+      color: #0073e6;
       font-weight: 500;
     }
 
-    .section-link:hover {
+    a:hover {
       text-decoration: underline;
     }
 
-    /* Responsive design */
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #0073e6;
+      color: white;
+      margin-top: 20px;
+    }
+
+    .markdown-content {
+      background-color: #f0f8ff;
+      padding: 20px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+
     @media (max-width: 600px) {
-      body {
-        padding: 1rem;
+      header h1 {
+        font-size: 2rem;
       }
-      .section-item {
-        padding: 1rem;
+
+      header p {
+        font-size: 1rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      li {
+        padding: 10px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <header>
     <h1>Healthcare Prompts</h1>
-    <p>Welcome to the <strong>Healthcare Prompts</strong> repository! This site contains 100+ ChatGPT prompts for healthcare professionals, organized into 12 categories.</p>
-    
-    <h2>Browse Prompts by Category</h2>
-    <ul class="section-list">
-      <li class="section-item"><a class="section-link" href="sections/1-patient-communication.md">Patient Communication</a></li>
-      <li class="section-item"><a class="section-link" href="sections/2-medical-documentation.md">Medical Documentation</a></li>
-      <li class="section-item"><a class="section-link" href="sections/3-medical-research.md">Medical Research</a></li>
-      <li class="section-item"><a class="section-link" href="sections/4-healthcare-policy-and-ethics.md">Healthcare Policy and Ethics</a></li>
-      <li class="section-item"><a class="section-link" href="sections/5-medical-education-and-training.md">Medical Education and Training</a></li>
-      <li class="section-item"><a class="section-link" href="sections/6-interdisciplinary-collaboration.md">Interdisciplinary Collaboration</a></li>
-      <li class="section-item"><a class="section-link" href="sections/7-public-health-and-prevention.md">Public Health and Prevention</a></li>
-      <li class="section-item"><a class="section-link" href="sections/8-medical-practice-management.md">Medical Practice Management</a></li>
-      <li class="section-item"><a class="section-link" href="sections/9-mental-health-and-wellbeing.md">Mental Health and Wellbeing</a></li>
-      <li class="section-item"><a class="section-link" href="sections/10-healthcare-marketing-and-outreach.md">Healthcare Marketing and Outreach</a></li>
-      <li class="section-item"><a class="section-link" href="sections/11-patient-privacy-and-data-security.md">Patient Privacy and Data Security</a></li>
-      <li class="section-item"><a class="section-link" href="sections/12-telemedicine-and-remote-patient-care.md">Telemedicine and Remote Patient Care</a></li>
-    </ul>
+    <p>Welcome to the Healthcare Prompts repository! This site contains 100+ ChatGPT prompts for healthcare professionals, organized into 12 categories.</p>
+  </header>
 
-    <p><a class="section-link" href="README.md">View the README</a> for more details.</p>
-  </div>
+  <main>
+    <h2>Browse Prompts by Category</h2>
+    <ul>
+      <li><a href="#" data-md="sections/1-patient-communication.md">Patient Communication</a></li>
+      <li><a href="#" data-md="sections/2-medical-documentation.md">Medical Documentation</a></li>
+      <li><a href="#" data-md="sections/3-medical-research.md">Medical Research</a></li>
+      <li><a href="#" data-md="sections/4-healthcare-policy-and-ethics.md">Healthcare Policy and Ethics</a></li>
+      <li><a href="#" data-md="sections/5-medical-education-and-training.md">Medical Education and Training</a></li>
+      <li><a href="#" data-md="sections/6-interdisciplinary-collaboration.md">Interdisciplinary Collaboration</a></li>
+      <li><a href="#" data-md="sections/7-public-health-and-prevention.md">Public Health and Prevention</a></li>
+      <li><a href="#" data-md="sections/8-medical-practice-management.md">Medical Practice Management</a></li>
+      <li><a href="#" data-md="sections/9-mental-health-and-wellbeing.md">Mental Health and Wellbeing</a></li>
+      <li><a href="#" data-md="sections/10-healthcare-marketing-and-outreach.md">Healthcare Marketing and Outreach</a></li>
+      <li><a href="#" data-md="sections/11-patient-privacy-and-data-security.md">Patient Privacy and Data Security</a></li>
+      <li><a href="#" data-md="sections/12-telemedicine-and-remote-patient-care.md">Telemedicine and Remote Patient Care</a></li>
+    </ul>
+    <p><a href="README.md">View the README for more details.</a></p>
+
+    <!-- Markdown content will be rendered here -->
+    <div id="markdown-content" class="markdown-content"></div>
+  </main>
+
+  <footer>
+    &copy; 2023 Healthcare Prompts. All rights reserved.
+  </footer>
+
+  <script>
+    // Function to fetch and render Markdown content
+    function renderMarkdown(file) {
+      const markdownContent = document.getElementById('markdown-content');
+      markdownContent.innerHTML = '<p>Loading...</p>'; // Show loading message
+
+      fetch(file)
+        .then(response => response.text())
+        .then(text => {
+          // Convert Markdown to HTML using marked.js
+          markdownContent.innerHTML = marked.parse(text);
+        })
+        .catch(error => {
+          console.error('Error loading Markdown file:', error);
+          markdownContent.innerHTML = '<p>Unable to load content. Please try again later.</p>';
+        });
+    }
+
+    // Add click event listeners to all category links
+    document.querySelectorAll('a[data-md]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent default link behavior
+        const markdownFile = link.getAttribute('data-md'); // Get the Markdown file path
+        renderMarkdown(markdownFile); // Render the Markdown content
+      });
+    });
+  </script>
 </body>
 </html>
