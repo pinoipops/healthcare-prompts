@@ -75,6 +75,7 @@
       padding: 20px;
       border-radius: 5px;
       margin-top: 20px;
+      outline: none; /* Remove default focus outline */
     }
     .loading {
       text-align: center;
@@ -123,7 +124,7 @@
     </article>
   </main>
   <footer>
-    &copy; © 2024 pinoi-popsik. Medical professionals' toolkit. All rights reserved.
+    &copy; 2023 Healthcare Prompts. All rights reserved.
   </footer>
   <script>
     // Cache for storing fetched Markdown files
@@ -155,10 +156,15 @@
 
         markdownCache[file] = text; // Cache the fetched content
         markdownContent.innerHTML = marked.parse(text); // Render Markdown content
-        scrollToContent();
+
+        // Delay focus to ensure content is fully rendered
+        setTimeout(() => {
+          scrollToContent();
+        }, 100); // 100ms delay
       } catch (error) {
         console.error('Error loading Markdown file:', error);
         markdownContent.innerHTML = `<p class="error">Unable to load content. ${error.message}</p>`;
+        scrollToContent(); // Focus even if there's an error
       }
     }
 
@@ -167,6 +173,7 @@
       const markdownContent = document.getElementById('markdown-content');
       markdownContent.scrollIntoView({ behavior: 'smooth' });
       markdownContent.focus(); // Set focus for keyboard and screen reader users
+      console.log('Focus set on markdown-content'); // Debugging
     }
 
     // Add click event listeners to all category links
