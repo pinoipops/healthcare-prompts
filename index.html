@@ -129,34 +129,28 @@
   <script>
     // Cache for storing fetched Markdown files
     const markdownCache = {};
-
     // Function to fetch and render Markdown content
     async function renderMarkdown(file) {
       const markdownContent = document.getElementById('markdown-content');
       markdownContent.innerHTML = '<p class="loading">Loading...</p>'; // Show loading message
-
       // Check if the file is already cached
       if (markdownCache[file]) {
         markdownContent.innerHTML = marked.parse(markdownCache[file]);
         scrollToContent();
         return;
       }
-
       try {
         const response = await fetch(file);
         if (!response.ok) {
           throw new Error(`Error fetching file: ${response.status}`);
         }
         const text = await response.text();
-
         // Validate the content (e.g., ensure it's not empty or incomplete)
         if (!text || text.trim().length === 0) {
           throw new Error('The file is empty or incomplete.');
         }
-
         markdownCache[file] = text; // Cache the fetched content
         markdownContent.innerHTML = marked.parse(text); // Render Markdown content
-
         // Delay focus to ensure content is fully rendered
         setTimeout(() => {
           scrollToContent();
@@ -167,7 +161,6 @@
         scrollToContent(); // Focus even if there's an error
       }
     }
-
     // Function to scroll to the markdown content and set focus
     function scrollToContent() {
       const markdownContent = document.getElementById('markdown-content');
@@ -175,7 +168,6 @@
       markdownContent.focus(); // Set focus for keyboard and screen reader users
       console.log('Focus set on markdown-content'); // Debugging
     }
-
     // Add click event listeners to all category links
     document.querySelectorAll('a[data-md]').forEach(link => {
       link.addEventListener('click', (e) => {
