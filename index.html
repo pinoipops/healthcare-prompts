@@ -116,23 +116,29 @@
     // Function to fetch and render Markdown content
     function renderMarkdown(file) {
       const markdownContent = document.getElementById('markdown-content');
-      markdownContent.innerHTML = '<p>Loading...</p>';
+      markdownContent.innerHTML = '<p>Loading...</p>'; // Show loading message
       fetch(file)
-        .then(response => response.text())
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Error fetching file: ${response.status}`);
+          }
+          return response.text();
+        })
         .then(text => {
-          markdownContent.innerHTML = marked.parse(text);
+          markdownContent.innerHTML = marked.parse(text); // Render Markdown content
         })
         .catch(error => {
           console.error('Error loading Markdown file:', error);
           markdownContent.innerHTML = '<p>Unable to load content. Please try again later.</p>';
         });
     }
+
     // Add click event listeners to all category links
     document.querySelectorAll('a[data-md]').forEach(link => {
       link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const markdownFile = link.getAttribute('data-md');
-        renderMarkdown(markdownFile);
+        e.preventDefault(); // Prevent default link behavior
+        const markdownFile = link.getAttribute('data-md'); // Get the Markdown file path
+        renderMarkdown(markdownFile); // Render the Markdown content
       });
     });
   </script>
