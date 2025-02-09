@@ -1,3 +1,24 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    font-family: 'Lexend', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lexend', sans-serif;
+    font-weight: 700; /* Bold for headings */
+  }
+  a {
+    color: #1a73e8; /* Optional: Custom link color */
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+
 # Healthcare Prompts
 
 Welcome to the **Healthcare Prompts** repository! This site contains 100+ ChatGPT prompts for healthcare professionals, organized into 12 categories.
