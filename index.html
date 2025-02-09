@@ -1,181 +1,616 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Healthcare Prompts</title>
-  <!-- Import Lexend Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&display=swap" rel="stylesheet">
-  <!-- Include marked.js for Markdown rendering -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
-  <style>
-    /* General Styles */
-    body {
-      font-family: 'Lexend', sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      background-color: #f9f9f9;
-      color: #333;
-    }
-    header {
-      background-color: #0073e6;
-      color: white;
-      text-align: center;
-      padding: 20px 10px;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
-    main {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    h2 {
-      color: #0073e6;
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      margin: 10px 0;
-      padding: 15px;
-      background: #f0f8ff;
-      border-radius: 5px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    li:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    a {
-      text-decoration: none;
-      color: #0073e6;
-      font-weight: 500;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    footer {
-      text-align: center;
-      padding: 10px;
-      background: #0073e6;
-      color: white;
-    }
-    .markdown-content {
-      background: #f0f8ff;
-      padding: 20px;
-      border-radius: 5px;
-      margin-top: 20px;
-      outline: none; /* Remove default focus outline */
-    }
-    .loading {
-      text-align: center;
-      font-style: italic;
-      color: #666;
-    }
-    .error {
-      color: #d9534f;
-      font-weight: bold;
-    }
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.5rem;
-      }
-      h2 {
-        font-size: 1.2rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Documentation</title>
+    <style>
+        body {
+            font-family: 'Lexend', sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .prompt {
+            margin-bottom: 10px;
+        }
+        .example {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #2c3e50;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Healthcare Prompts</h1>
-  </header>
-  <main>
-    <section aria-labelledby="categories-heading">
-      <h2 id="categories-heading">Browse Prompts by Category</h2>
-      <ul role="navigation">
-        <li><a href="#" data-md="sections/1-patient-communication.md" aria-label="Patient Communication">Patient Communication</a></li>
-        <li><a href="#" data-md="sections/2-medical-documentation.md" aria-label="Medical Documentation">Medical Documentation</a></li>
-        <li><a href="#" data-md="sections/3-medical-research.md" aria-label="Medical Research">Medical Research</a></li>
-        <li><a href="#" data-md="sections/4-healthcare-policy-and-ethics.md" aria-label="Healthcare Policy and Ethics">Healthcare Policy and Ethics</a></li>
-        <li><a href="#" data-md="sections/5-medical-education-and-training.md" aria-label="Medical Education and Training">Medical Education and Training</a></li>
-        <li><a href="#" data-md="sections/6-interdisciplinary-collaboration.md" aria-label="Interdisciplinary Collaboration">Interdisciplinary Collaboration</a></li>
-        <li><a href="#" data-md="sections/7-public-health-and-prevention.md" aria-label="Public Health and Prevention">Public Health and Prevention</a></li>
-        <li><a href="#" data-md="sections/8-medical-practice-management.md" aria-label="Medical Practice Management">Medical Practice Management</a></li>
-        <li><a href="#" data-md="sections/9-mental-health-and-wellbeing.md" aria-label="Mental Health and Wellbeing">Mental Health and Wellbeing</a></li>
-        <li><a href="#" data-md="sections/10-healthcare-marketing-and-outreach.md" aria-label="Healthcare Marketing and Outreach">Healthcare Marketing and Outreach</a></li>
-        <li><a href="#" data-md="sections/11-patient-privacy-and-data-security.md" aria-label="Patient Privacy and Data Security">Patient Privacy and Data Security</a></li>
-        <li><a href="#" data-md="sections/12-telemedicine-and-remote-patient-care.md" aria-label="Telemedicine and Remote Patient Care">Telemedicine and Remote Patient Care</a></li>
-      </ul>
-      <p><a href="README.md" aria-label="View the README for more details">View the README for more details.</a></p>
-    </section>
-    <article id="markdown-content" class="markdown-content" tabindex="-1">
-      <!-- Markdown content will be rendered here -->
-    </article>
-  </main>
-  <footer>
-    &copy; 2023 Healthcare Prompts. All rights reserved.
-  </footer>
-  <script>
-    // Cache for storing fetched Markdown files
-    const markdownCache = {};
-    // Function to fetch and render Markdown content
-    async function renderMarkdown(file) {
-      const markdownContent = document.getElementById('markdown-content');
-      markdownContent.innerHTML = '<p class="loading">Loading...</p>'; // Show loading message
-      // Check if the file is already cached
-      if (markdownCache[file]) {
-        markdownContent.innerHTML = marked.parse(markdownCache[file]);
-        scrollToContent();
-        return;
-      }
-      try {
-        const response = await fetch(file);
-        if (!response.ok) {
-          throw new Error(`Error fetching file: ${response.status}`);
-        }
-        const text = await response.text();
-        // Validate the content (e.g., ensure it's not empty or incomplete)
-        if (!text || text.trim().length === 0) {
-          throw new Error('The file is empty or incomplete.');
-        }
-        markdownCache[file] = text; // Cache the fetched content
-        markdownContent.innerHTML = marked.parse(text); // Render Markdown content
-        // Delay focus to ensure content is fully rendered
-        setTimeout(() => {
-          scrollToContent();
-        }, 100); // 100ms delay
-      } catch (error) {
-        console.error('Error loading Markdown file:', error);
-        markdownContent.innerHTML = `<p class="error">Unable to load content. ${error.message}</p>`;
-        scrollToContent(); // Focus even if there's an error
-      }
-    }
-    // Function to scroll to the markdown content and set focus
-    function scrollToContent() {
-      const markdownContent = document.getElementById('markdown-content');
-      markdownContent.scrollIntoView({ behavior: 'smooth' });
-      markdownContent.focus(); // Set focus for keyboard and screen reader users
-      console.log('Focus set on markdown-content'); // Debugging
-    }
-    // Add click event listeners to all category links
-    document.querySelectorAll('a[data-md]').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault(); // Prevent default link behavior
-        const markdownFile = link.getAttribute('data-md'); // Get the Markdown file path
-        renderMarkdown(markdownFile); // Render the Markdown content
-      });
-    });
-  </script>
-</body>
-</html>
+    <div class="container">
+        <!-- File 1: Patient Communication -->
+        <h1>1. Patient Communication</h1>
+        <div class="section">
+            <h2>Explaining Medical Conditions and Treatments</h2>
+            <div class="prompt">
+                <h3>1. Simplifying Medical Conditions</h3>
+                <p>"Explain [medical condition] in simple language for a newly diagnosed patient. Provide 3 examples, each within 200 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>2. Treatment Options Overview</h3>
+                <p>"Describe the treatment options for [medical condition]. Provide 3 examples, each within 150 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>3. Causes and Risk Factors Summary</h3>
+                <p>"Summarize the causes and risk factors for [medical condition]. Create 3 concise explanations with a maximum of 100 words each."</p>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Addressing Patient Concerns and Questions</h2>
+            <div class="prompt">
+                <h3>1. Medication Side Effects Reassurance</h3>
+                <p>"A patient is worried about the side effects of their prescribed medication for [medical condition]. Write 3 responses addressing their concerns and providing reassurance. Each response should be no more than 150 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>2. Financial Assistance Guidance</h3>
+                <p>"A patient has concerns about the cost of their treatment for [medical condition]. Write 3 responses discussing financial assistance options and resources. Limit each response to 150 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>3. Procedure Hesitation Support</h3>
+                <p>"A patient is hesitant to undergo a recommended medical procedure for [medical condition]. Write 3 responses addressing their fears and providing information about the procedure. Each response should be no more than 200 words."</p>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Creating Empathetic and Supportive Messages</h2>
+            <div class="prompt">
+                <h3>1. Support for Serious Diagnoses</h3>
+                <p>"Write 3 empathetic and supportive messages for patients who have received a [serious medical diagnosis]. Each message should be no more than 200 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>2. Encouragement for Chronic Condition Management</h3>
+                <p>"Craft 3 messages of encouragement for patients struggling with the challenges of managing a chronic condition like [medical condition]. Limit each message to 150 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>3. Motivation for Treatment Adherence</h3>
+                <p>"Compose 3 messages to help patients stay motivated and engaged in their treatment plan for [medical condition]. Each message should be no more than 200 words."</p>
+            </div>
+        </div>
+
+        <!-- File 2: Medical Documentation -->
+        <h1>2. Medical Documentation</h1>
+        <div class="section">
+            <h2>Writing Case Summaries and Patient Histories</h2>
+            <div class="prompt">
+                <h3>1. Case Summaries</h3>
+                <p>"Create a case summary for a patient with [medical condition]. Give me 3 examples. You have 250 words max for each summary."</p>
+            </div>
+            <div class="prompt">
+                <h3>2. Patient Histories</h3>
+                <p>"Write a patient history for an individual with [medical condition]. Provide 3 examples, each within 300 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>3. Diagnostic Test Summaries</h3>
+                <p>"Summarize the key findings from a patient's diagnostic tests for [medical condition]. Create 3 concise summaries with a maximum of 200 words each."</p>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Drafting Progress Notes and Treatment Plans</h2>
+            <div class="prompt">
+                <h3>1. Progress Notes</h3>
+                <p>"Compose 3 progress notes for a patient undergoing treatment for [medical condition]. Each note should be no more than 150 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>2. Treatment Plans</h3>
+                <p>"Develop a treatment plan for a patient with [medical condition]. Write 3 examples, each limited to 250 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>3. Follow-Up Recommendations</h3>
+                <p>"Create 3 examples of follow-up recommendations for a patient recovering from [medical condition]. Each recommendation should be no more than 200 words."</p>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Creating Referral Letters and Discharge Summaries</h2>
+            <div class="prompt">
+                <h3>1. Referral Letters</h3>
+                <p>"Write a referral letter for a patient with [medical condition] to see a specialist. Provide 3 examples, each within 250 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>2. Discharge Summaries</h3>
+                <p>"Craft 3 discharge summaries for a patient who has been treated for [medical condition]. Limit each summary to 300 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>3. Post-Discharge Care Instructions</h3>
+                <p>"Compose 3 examples of post-discharge care instructions for a patient who has been treated for [medical condition]. Each instruction should be no more than 200 words."</p>
+            </div>
+        </div>
+
+        <!-- File 3: Medical Research -->
+        <h1>3. Medical Research</h1>
+        <div class="section">
+            <h2>Summarizing Research Articles and Clinical Trials</h2>
+            <div class="prompt">
+                <h3>1. Research Article Summaries</h3>
+                <p>"Summarize a research article about [medical condition] or its treatment. Give me 3 examples. You have 250 words max for each summary."</p>
+            </div>
+            <div class="prompt">
+                <h3>2. Clinical Trial Overviews</h3>
+                <p>"Write a brief overview of a clinical trial related to [medical condition]. Provide 3 examples, each within 200 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>3. Study Findings Summaries</h3>
+                <p>"Create a concise summary of the key findings from a recent study on [medical condition]. Develop 3 examples with a maximum of 150 words each."</p>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Generating Ideas for Research Topics</h2>
+            <div class="prompt">
+                <h3>1. Research Topic Proposals</h3>
+                <p>"Propose 3 research topics related to [medical condition] that would be valuable for further study. Each topic should be accompanied by a brief explanation of its significance, within 100 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>2. Innovative Research Approaches</h3>
+                <p>"Suggest 3 innovative approaches to investigating the causes or treatments of [medical condition]. Provide a brief description of each approach, limited to 150 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>3. Identifying Research Gaps</h3>
+                <p>"Identify 3 gaps in the current understanding of [medical condition] that could be addressed through future research. Provide a concise explanation for each gap, within 100 words."</p>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Preparing Abstracts and Conference Presentations</h2>
+            <div class="prompt">
+                <h3>1. Research Paper Abstracts</h3>
+                <p>"Write an abstract for a research paper on [medical condition]. Provide 3 examples, each within 250 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>2. Conference Presentation Outlines</h3>
+                <p>"Create a conference presentation outline for a study related to [medical condition]. Develop 3 examples, each limited to 300 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>3. Panel Discussion Talking Points</h3>
+                <p>"Compose 3 talking points for a panel discussion on recent advancements in the treatment of [medical condition]. Each talking point should be no more than 150 words."</p>
+            </div>
+        </div>
+
+        <!-- File 4: Healthcare Policy and Ethics -->
+        <h1>4. Healthcare Policy and Ethics</h1>
+        <div class="section">
+            <h2>Discussing Current Healthcare Policies and Their Impact</h2>
+            <div class="prompt">
+                <h3>1. Policy Impact Analysis</h3>
+                <p>"Analyze the impact of a current healthcare policy on patients with [medical condition]. Give me 3 examples. You have 250 words max for each analysis."</p>
+            </div>
+            <div class="prompt">
+                <h3>2. Proposed Policy Consequences</h3>
+                <p>"Discuss the potential consequences of a proposed change in healthcare policy for [medical condition] treatment. Provide 3 examples, each within 200 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>3. Provider Policy Effects</h3>
+                <p>"Explain how a specific healthcare policy affects healthcare providers treating patients with [medical condition]. Create 3 concise explanations with a maximum of 150 words each."</p>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Debating Ethical Dilemmas in Medicine</h2>
+            <div class="prompt">
+                <h3>1. Ethical Dilemmas in Treatment</h3>
+                <p>"Present 3 ethical dilemmas related to the treatment of [medical condition]. For each dilemma, provide a brief description and discussion of the potential consequences, within 200 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>2. Ethical Challenges for Providers</h3>
+                <p>"Describe 3 ethical challenges healthcare professionals may face when managing patients with [medical condition]. Provide a brief analysis of each challenge, limited to 150 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>3. Conflicts of Interest</h3>
+                <p>"Explore 3 potential conflicts of interest that may arise in the context of treating [medical condition]. Offer a concise explanation for each conflict, within 100 words."</p>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Analyzing the Implications of New Technologies in Healthcare</h2>
+            <div class="prompt">
+                <h3>1. Technology Benefits and Drawbacks</h3>
+                <p>"Examine the potential benefits and drawbacks of a new technology used in the treatment of [medical condition]. Provide 3 examples, each within 250 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>2. Ethical Considerations of Technology</h3>
+                <p>"Discuss 3 ethical considerations related to the use of a specific healthcare technology for managing [medical condition]. Develop 3 examples, each limited to 200 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>3. Patient Experience and Delivery Impact</h3>
+                <p>"Evaluate how a new technology might affect the patient experience and healthcare delivery for those with [medical condition]. Compose 3 analyses, each no more than 150 words."</p>
+            </div>
+        </div>
+
+        <!-- File 5: Medical Education and Training -->
+        <h1>5. Medical Education and Training</h1>
+        <div class="section">
+            <h2>Developing Educational Materials for Medical Professionals</h2>
+            <div class="prompt">
+                <h3>1. Educational Resources</h3>
+                <p>"Create an educational resource about [medical condition] for medical professionals. Give me 3 examples. You have 250 words max for each resource."</p>
+            </div>
+            <div class="prompt">
+                <h3>2. Training Module Outlines</h3>
+                <p>"Design a training module outline for a new treatment approach for [medical condition]. Provide 3 examples, each within 200 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>3. Case Studies for Medical Students</h3>
+                <p>"Write a case study on a patient with [medical condition] for medical students to analyze. Create 3 concise case studies with a maximum of 300 words each."</p>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Preparing Teaching Materials for Patient Education</h2>
+            <div class="prompt">
+                <h3>1. Patient Education Handouts</h3>
+                <p>"Develop a patient education handout on [medical condition] and its management. Create 3 examples, each no more than 200 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>2. Visual Aids for Patients</h3>
+                <p>"Design a visual aid, such as an infographic or flowchart, to help patients understand the treatment process for [medical condition]. Provide a brief description of 3 examples, limited to 150 words each."</p>
+            </div>
+            <div class="prompt">
+                <h3>3. Frequently Asked Questions (FAQs)</h3>
+                <p>"Create a list of frequently asked questions (FAQs) and their answers for patients with [medical condition]. Compose 3 sets of FAQs, each containing 5 questions and answers, with a maximum of 250 words per set."</p>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Facilitating Medical Workshops and Training Sessions</h2>
+            <div class="prompt">
+                <h3>1. Workshop Agendas</h3>
+                <p>"Prepare an agenda for a medical workshop designed to teach healthcare professionals about new advancements in the treatment of [medical condition]. Provide 3 examples, each within 300 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>2. Role-Play Scenarios</h3>
+                <p>"Develop a role-play scenario for a training session on effective patient communication for individuals with [medical condition]. Write 3 scenarios, each limited to 200 words."</p>
+            </div>
+            <div class="prompt">
+                <h3>3. Interactive Learning Activities</h3>
+                <p>"Design an interactive learning activity for medical students to improve their understanding of [medical condition]. Compose 3 activity descriptions, each no more than 150 words."</p>
+            </div>
+        </div>
+
+        <!-- File 6: Interdisciplinary Collaboration -->
+        <h1>6. Interdisciplinary Collaboration</h1>
+        <div class="section">
+            <h2>Facilitating Communication Between Healthcare Professionals</h2>
+    <div class="prompt">
+        <h3>1. Email Drafts</h3>
+        <p>"Draft an email to inform an interdisciplinary team about a patient with [medical condition]. Give me 3 examples. You have 250 words max for each email."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Meeting Agendas</h3>
+        <p>"Compose a meeting agenda for an interdisciplinary team discussing the treatment plan for a patient with [medical condition]. Provide 3 examples, each within 200 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Case Summaries</h3>
+        <p>"Write a summary of a patient's case to be shared with an interdisciplinary team working on [medical condition]. Create 3 concise case summaries with a maximum of 300 words each."</p>
+    </div>
+</div>
+<div class="section">
+    <h2>Promoting Interdisciplinary Collaboration in Patient Care</h2>
+    <div class="prompt">
+        <h3>1. Collaboration Strategies</h3>
+        <p>"Describe 3 strategies for enhancing interdisciplinary collaboration in the management of patients with [medical condition]. For each strategy, provide a brief explanation of its potential benefits, within 200 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Barriers to Collaboration</h3>
+        <p>"Identify 3 potential barriers to effective interdisciplinary collaboration in the care of patients with [medical condition]. Provide a brief analysis of each barrier, limited to 150 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Initiatives for Improvement</h3>
+        <p>"Propose 3 initiatives to improve interdisciplinary communication and teamwork for healthcare professionals treating [medical condition]. Offer a concise explanation for each initiative, within 100 words."</p>
+    </div>
+</div>
+<div class="section">
+    <h2>Sharing Expertise and Knowledge Across Disciplines</h2>
+    <div class="prompt">
+        <h3>1. Seminars and Workshops</h3>
+        <p>"Design a seminar or workshop for healthcare professionals from different disciplines to share their expertise on [medical condition]. Provide 3 examples, each within 300 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Knowledge-Sharing Platforms</h3>
+        <p>"Create a knowledge-sharing platform or resource for interdisciplinary collaboration on [medical condition]. Develop 3 examples, each limited to 200 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Case Conference Formats</h3>
+        <p>"Outline a case conference format for discussing complex cases of [medical condition] with professionals from different disciplines. Compose 3 outlines, each no more than 250 words."</p>
+    </div>
+</div>
+
+<!-- File 7: Public Health and Prevention -->
+<h1>7. Public Health and Prevention</h1>
+<div class="section">
+    <h2>Developing Public Health Campaigns and Awareness Programs</h2>
+    <div class="prompt">
+        <h3>1. Public Health Campaigns</h3>
+        <p>"Design a public health campaign to raise awareness about [medical condition] and its prevention. Give me 3 examples. You have 250 words max for each campaign description."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Community-Based Awareness Programs</h3>
+        <p>"Create an outline for a community-based awareness program focusing on [medical condition]. Provide 3 examples, each within 200 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Social Media Campaigns</h3>
+        <p>"Propose a social media campaign to educate the public on the early signs and symptoms of [medical condition]. Develop 3 concise campaign strategies with a maximum of 150 words each."</p>
+    </div>
+</div>
+<div class="section">
+    <h2>Promoting Preventive Measures and Healthy Behaviors</h2>
+    <div class="prompt">
+        <h3>1. Preventive Measures Strategies</h3>
+        <p>"Describe 3 strategies for encouraging preventive measures and healthy behaviors to reduce the risk of [medical condition]. For each strategy, provide a brief explanation of its potential benefits, within 200 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Educational Resources</h3>
+        <p>"Identify 3 educational resources to help individuals adopt healthy lifestyle habits that may lower the risk of developing [medical condition]. Provide a brief description of each resource, limited to 150 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Community-Based Interventions</h3>
+        <p>"Suggest 3 community-based interventions to promote healthy behaviors and prevent [medical condition]. Offer a concise explanation for each intervention, within 100 words."</p>
+    </div>
+</div>
+<div class="section">
+    <h2>Evaluating the Effectiveness of Public Health Interventions</h2>
+    <div class="prompt">
+        <h3>1. Study Designs</h3>
+        <p>"Outline a study design to evaluate the impact of a public health intervention on [medical condition] prevalence. Provide 3 examples, each within 300 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Success Criteria</h3>
+        <p>"Develop a set of criteria to assess the success of a public health campaign aimed at preventing [medical condition]. Create 3 sets of criteria, each containing 5 key indicators, with a maximum of 250 words per set."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Feedback Methods</h3>
+        <p>"Propose 3 methods to gather feedback from the public on a health promotion campaign focused on [medical condition]. Compose 3 method descriptions, each no more than 150 words."</p>
+    </div>
+</div>
+
+<!-- File 8: Medical Practice Management -->
+<h1>8. Medical Practice Management</h1>
+<div class="section">
+    <h2>Improving Patient Experience and Satisfaction</h2>
+    <div class="prompt">
+        <h3>1. Patient Experience Strategies</h3>
+        <p>"Describe 3 strategies for enhancing patient experience and satisfaction in a medical practice focused on [medical condition]. For each strategy, provide a brief explanation of its potential benefits, within 200 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Key Performance Indicators (KPIs)</h3>
+        <p>"Identify 3 key performance indicators (KPIs) to track and measure patient satisfaction in a medical practice treating [medical condition]. Provide a brief description of each KPI, limited to 150 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Patient Communication Initiatives</h3>
+        <p>"Propose 3 initiatives to improve patient communication and engagement in a medical practice focused on [medical condition]. Offer a concise explanation for each initiative, within 100 words."</p>
+    </div>
+</div>
+<div class="section">
+    <h2>Streamlining Operations and Workflow</h2>
+    <div class="prompt">
+        <h3>1. Operational Recommendations</h3>
+        <p>"Develop 3 recommendations for streamlining operations and workflow in a medical practice specializing in [medical condition]. Provide a brief explanation of each recommendation, within 200 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Technological Solutions</h3>
+        <p>"Suggest 3 technological solutions to improve efficiency and organization in a medical practice treating [medical condition]. Offer a concise description of each solution, limited to 150 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Workflow Diagrams</h3>
+        <p>"Create a process map or workflow diagram for managing patients with [medical condition] in a medical practice setting. Describe 3 examples, each within 250 words."</p>
+    </div>
+</div>
+<div class="section">
+    <h2>Staff Training and Development</h2>
+    <div class="prompt">
+        <h3>1. Staff Training Programs</h3>
+        <p>"Design a staff training program to improve the understanding and management of [medical condition] in a medical practice. Provide 3 examples, each within 300 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Professional Development Plans</h3>
+        <p>"Develop a professional development plan for healthcare staff to enhance their expertise in [medical condition]. Create 3 examples, each limited to 200 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Continuous Learning Strategies</h3>
+        <p>"Propose 3 strategies to promote a culture of continuous learning and improvement among healthcare staff in a practice treating [medical condition]. Compose 3 strategy descriptions, each no more than 150 words."</p>
+    </div>
+</div>
+
+<!-- File 9: Mental Health and Wellbeing -->
+<h1>9. Mental Health and Wellbeing</h1>
+<div class="section">
+    <h2>Assessing Mental Health Symptoms and Concerns</h2>
+    <div class="prompt">
+        <h3>1. Mental Health Questionnaires</h3>
+        <p>"Create a questionnaire to screen for common mental health symptoms associated with [medical condition]. Give me 3 examples. You have 250 words max for each questionnaire."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Key Questions for Patients</h3>
+        <p>"Develop a list of 5 key questions to ask a patient about their mental health and wellbeing related to [medical condition]. Provide 3 sets of questions, with a brief explanation for each question within 150 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Mental Health Assessment Tools</h3>
+        <p>"Design a mental health assessment tool specific to individuals living with [medical condition]. Create 3 concise tool examples with a maximum of 300 words each."</p>
+    </div>
+</div>
+<div class="section">
+    <h2>Providing Mental Health Support and Coping</h2>
+    <div class="prompt">
+        <h3>1. Support Group Programs</h3>
+        <p>"Outline a support group program for individuals experiencing mental health challenges related to [medical condition]. Develop 3 examples, each no more than 200 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Coping Strategies</h3>
+        <p>"Describe 3 coping strategies for individuals struggling with the mental health impact of [medical condition]. Provide a brief explanation of each strategy, limited to 150 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Mental Health Resources</h3>
+        <p>"Suggest 3 resources to help patients manage the emotional and psychological aspects of living with [medical condition]. Offer a concise description for each resource, within 100 words."</p>
+    </div>
+</div>
+<div class="section">
+    <h2>Incorporating Mental Health Care into Overall Treatment Plans</h2>
+    <div class="prompt">
+        <h3>1. Integrated Treatment Plans</h3>
+        <p>"Propose a treatment plan that integrates mental health care for a patient with [medical condition]. Provide 3 examples, each within 300 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Communication Strategies</h3>
+        <p>"Discuss 3 strategies for improving communication between mental health professionals and other healthcare providers treating patients with [medical condition]. Develop 3 examples, each limited to 200 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Comprehensive Care Plans</h3>
+        <p>"Create a comprehensive care plan that addresses both the physical and mental health needs of a patient with [medical condition]. Compose 3 care plan examples, each no more than 250 words."</p>
+    </div>
+</div>
+
+<!-- File 10: Healthcare Marketing and Outreach -->
+<h1>10. Healthcare Marketing and Outreach</h1>
+<div class="section">
+    <h2>Developing Healthcare Marketing Campaigns</h2>
+    <div class="prompt">
+        <h3>1. Marketing Campaigns</h3>
+        <p>"Design a marketing campaign to promote a medical practice specializing in [medical condition]. Give me 3 examples. You have 250 words max for each campaign description."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Content Strategies</h3>
+        <p>"Create a content strategy for a healthcare organization focused on [medical condition] to engage and educate potential patients. Provide 3 examples, each within 200 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Social Media Plans</h3>
+        <p>"Develop a social media plan to increase awareness of a medical clinic treating [medical condition]. Outline 3 concise strategies with a maximum of 150 words each."</p>
+    </div>
+</div>
+<div class="section">
+    <h2>Building Community Partnerships and Collaborations</h2>
+    <div class="prompt">
+        <h3>1. Collaboration Initiatives</h3>
+        <p>"Propose 3 initiatives to foster collaboration between a healthcare organization specializing in [medical condition] and local community organizations. For each initiative, provide a brief explanation of its potential benefits, within 200 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Community Partners</h3>
+        <p>"Identify 3 potential community partners for a healthcare organization focused on [medical condition]. Offer a concise description of each partner and the potential collaboration, limited to 150 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Community Health Fair Plans</h3>
+        <p>"Outline a plan for organizing a community health fair or event that highlights [medical condition]. Develop 3 examples, each no more than 250 words."</p>
+    </div>
+</div>
+<div class="section">
+    <h2>Improving Patient Outreach and Engagement</h2>
+    <div class="prompt">
+        <h3>1. Patient Outreach Programs</h3>
+        <p>"Design a patient outreach program to provide information and resources for individuals with [medical condition]. Provide 3 examples, each within 300 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Educational Blog Posts</h3>
+        <p>"Create a series of educational blog posts or articles targeting individuals living with [medical condition]. Develop 3 content topics, each with a brief description limited to 200 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Email Newsletter Strategies</h3>
+        <p>"Develop an email newsletter strategy to engage and inform patients about new treatments, resources, and research related to [medical condition]. Compose 3 newsletter examples, each no more than 150 words."</p>
+    </div>
+</div>
+
+<!-- File 11: Patient Privacy and Data Security -->
+<h1>11. Patient Privacy and Data Security</h1>
+<div class="section">
+    <h2>Ensuring Compliance with Privacy Regulations</h2>
+    <div class="prompt">
+        <h3>1. Best Practices for Compliance</h3>
+        <p>"Outline 3 best practices for maintaining compliance with healthcare privacy regulations (such as HIPAA) in a medical practice treating [medical condition]. For each practice, provide a brief explanation of its importance, within 200 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Privacy Audit Checklists</h3>
+        <p>"Develop a checklist for conducting regular privacy audits in a healthcare organization focused on [medical condition]. Create 3 checklists, each containing 5 key items, with a maximum of 250 words per checklist."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Privacy Risks and Mitigation</h3>
+        <p>"Identify 3 potential privacy risks or vulnerabilities in a healthcare setting that manages patient data for [medical condition]. Offer a concise description of each risk and a suggested mitigation strategy, limited to 150 words."</p>
+    </div>
+</div>
+<div class="section">
+    <h2>Implementing Data Security Measures</h2>
+    <div class="prompt">
+        <h3>1. Data Security Measures</h3>
+        <p>"Propose 3 data security measures to protect patient information in a medical practice specializing in [medical condition]. Provide a brief explanation of each measure, within 200 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Staff Training Modules</h3>
+        <p>"Create a staff training module outline for data security and patient privacy in a healthcare organization focused on [medical condition]. Develop 3 module outlines, each no more than 250 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Data Security Culture Strategies</h3>
+        <p>"Discuss 3 strategies for fostering a culture of data security and patient privacy among healthcare staff in a practice treating [medical condition]. Compose 3 strategy descriptions, each limited to 150 words."</p>
+    </div>
+</div>
+<div class="section">
+    <h2>Managing Data Breaches and Security Incidents</h2>
+    <div class="prompt">
+        <h3>1. Data Breach Response Plans</h3>
+        <p>"Design a data breach response plan for a healthcare organization managing sensitive patient data related to [medical condition]. Provide 3 examples, each within 300 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Incident Response Guidelines</h3>
+        <p>"Develop a set of guidelines for healthcare staff to follow in the event of a data security incident involving [medical condition] patient data. Create 3 sets of guidelines, each containing 5 key steps, with a maximum of 250 words per set."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Communication Plans</h3>
+        <p>"Outline a communication plan for notifying patients and relevant authorities in case of a data breach involving patient information for [medical condition]. Compose 3 communication plan examples, each no more than 200 words."</p>
+    </div>
+</div>
+
+<!-- File 12: Telemedicine and Remote Patient Care -->
+<h1>12. Telemedicine and Remote Patient Care</h1>
+<div class="section">
+    <h2>Implementing Telemedicine Services</h2>
+    <div class="prompt">
+        <h3>1. Telemedicine Integration Plans</h3>
+        <p>"Develop a plan for integrating telemedicine services into a medical practice focused on [medical condition]. Give me 3 examples. You have 250 words max for each plan."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Remote Consultation Processes</h3>
+        <p>"Outline a process for conducting remote patient consultations for individuals with [medical condition]. Provide 3 examples, each within 200 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Staff Training Strategies</h3>
+        <p>"Propose 3 strategies for training healthcare staff in telemedicine best practices for [medical condition]. Offer a concise explanation for each strategy, within 150 words."</p>
+    </div>
+</div>
+<div class="section">
+    <h2>Enhancing Patient Experience Through Telemedicine</h2>
+    <div class="prompt">
+        <h3>1. Patient Experience Improvement</h3>
+        <p>"Describe 3 ways to improve patient experience and satisfaction with telemedicine services for [medical condition]. For each way, provide a brief explanation of its potential benefits, within 200 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Barriers to Telemedicine Implementation</h3>
+        <p>"Identify 3 potential barriers to successful telemedicine implementation for patients with [medical condition]. Provide a brief analysis of each barrier, limited to 150 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Patient Engagement Initiatives</h3>
+        <p>"Suggest 3 initiatives to promote patient engagement and communication through telemedicine services for individuals with [medical condition]. Develop a concise explanation for each initiative, within 100 words."</p>
+    </div>
+</div>
+<div class="section">
+    <h2>Monitoring and Managing Patient Health Remotely</h2>
+    <div class="prompt">
+        <h3>1. Remote Monitoring Programs</h3>
+        <p>"Design a remote monitoring program for patients with [medical condition]. Provide 3 examples, each within 300 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>2. Care Management Guidelines</h3>
+        <p>"Create a set of guidelines for managing the ongoing care of patients with [medical condition] using telemedicine and remote monitoring. Develop 3 sets of guidelines, each limited to 200 words."</p>
+    </div>
+    <div class="prompt">
+        <h3>3. Care Coordination Plans</h3>
+        <p>"Propose a plan for using telemedicine to coordinate care among a multidisciplinary team treating patients with [medical condition]. Compose 3 care coordination plan examples, each no more than 250 words."</p>
+    </div>
+</div>
