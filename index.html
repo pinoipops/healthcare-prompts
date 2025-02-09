@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Healthcare Prompts</title>
-  <!-- Import Lexend Font from Google Fonts -->
+  <!-- Import Lexend Font -->
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&display=swap" rel="stylesheet">
   <!-- Include marked.js for Markdown rendering -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -18,100 +18,70 @@
       background-color: #f9f9f9;
       color: #333;
     }
-
     header {
       background-color: #0073e6;
       color: white;
-      padding: 20px 10px;
       text-align: center;
+      padding: 20px 10px;
     }
-
     header h1 {
       margin: 0;
-      font-size: 2.5rem;
-      font-weight: 700;
+      font-size: 2rem;
     }
-
-    header p {
-      margin: 5px 0 0;
-      font-size: 1.2rem;
-      font-weight: 400;
-    }
-
     main {
       max-width: 800px;
       margin: 20px auto;
       padding: 20px;
-      background-color: white;
+      background: white;
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-
     h2 {
       color: #0073e6;
-      font-size: 2rem;
-      font-weight: 700;
+      font-size: 1.5rem;
       margin-bottom: 15px;
     }
-
     ul {
-      list-style-type: none;
+      list-style: none;
       padding: 0;
     }
-
     li {
-      background-color: #f0f8ff;
       margin: 10px 0;
       padding: 15px;
+      background: #f0f8ff;
       border-radius: 5px;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-
     li:hover {
       transform: translateY(-5px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-
     a {
       text-decoration: none;
       color: #0073e6;
       font-weight: 500;
     }
-
     a:hover {
       text-decoration: underline;
     }
-
     footer {
       text-align: center;
       padding: 10px;
-      background-color: #0073e6;
+      background: #0073e6;
       color: white;
-      margin-top: 20px;
     }
-
     .markdown-content {
-      background-color: #f0f8ff;
+      background: #f0f8ff;
       padding: 20px;
       border-radius: 5px;
       margin-top: 20px;
     }
-
     @media (max-width: 600px) {
       header h1 {
-        font-size: 2rem;
-      }
-
-      header p {
-        font-size: 1rem;
-      }
-
-      h2 {
         font-size: 1.5rem;
       }
-
-      li {
-        padding: 10px;
+      h2 {
+        font-size: 1.2rem;
       }
     }
   </style>
@@ -119,9 +89,7 @@
 <body>
   <header>
     <h1>Healthcare Prompts</h1>
-    <p>Discover the Healthcare Prompts repository, offering 100+ prompts for healthcare professionals, sorted into 12 categories.</p>
   </header>
-
   <main>
     <h2>Browse Prompts by Category</h2>
     <ul>
@@ -139,25 +107,19 @@
       <li><a href="#" data-md="sections/12-telemedicine-and-remote-patient-care.md">Telemedicine and Remote Patient Care</a></li>
     </ul>
     <p><a href="README.md">View the README for more details.</a></p>
-
-    <!-- Markdown content will be rendered here -->
     <div id="markdown-content" class="markdown-content"></div>
   </main>
-
   <footer>
     &copy; 2023 Healthcare Prompts. All rights reserved.
   </footer>
-
   <script>
     // Function to fetch and render Markdown content
     function renderMarkdown(file) {
       const markdownContent = document.getElementById('markdown-content');
-      markdownContent.innerHTML = '<p>Loading...</p>'; // Show loading message
-
+      markdownContent.innerHTML = '<p>Loading...</p>';
       fetch(file)
         .then(response => response.text())
         .then(text => {
-          // Convert Markdown to HTML using marked.js
           markdownContent.innerHTML = marked.parse(text);
         })
         .catch(error => {
@@ -165,13 +127,12 @@
           markdownContent.innerHTML = '<p>Unable to load content. Please try again later.</p>';
         });
     }
-
     // Add click event listeners to all category links
     document.querySelectorAll('a[data-md]').forEach(link => {
       link.addEventListener('click', (e) => {
-        e.preventDefault(); // Prevent default link behavior
-        const markdownFile = link.getAttribute('data-md'); // Get the Markdown file path
-        renderMarkdown(markdownFile); // Render the Markdown content
+        e.preventDefault();
+        const markdownFile = link.getAttribute('data-md');
+        renderMarkdown(markdownFile);
       });
     });
   </script>
